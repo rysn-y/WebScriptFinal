@@ -1,7 +1,7 @@
 
 const { MongoClient, ObjectId } = require('mongodb');
 
-const uri = 'mongodb+srv://barnabasagbekorode:barney02@cluster0.numvz.mongodb.net/';  
+const uri = 'mongodb+srv://barnabasagbekorode:*******@cluster0.numvz.mongodb.net/';  
 const client = new MongoClient(uri);
 
 async function connectDB() {
@@ -30,3 +30,6 @@ async function editReminder(id, updatedFields) {
 }
 
 module.exports = { addReminder, removeReminder, editReminder };
+
+
+//barney02
