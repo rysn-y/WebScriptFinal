@@ -3,6 +3,7 @@
 const mongoose = require("mongoose");
 
 let reminderModel = mongoose.Schema({
+    title: String,
     Description: String,
     Date: String,
     Time: Number,
