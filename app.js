@@ -14,15 +14,15 @@ const app = express();
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
-const mongoose = require('mongoose');
-const DB = require('./db');
+/* const mongoose = require('mongoose');
+let DB = require('./db');
 mongoose.connect(DB.URI);
-const mongoDB = mongoose.connection;
+let mongoDB = mongoose.connection;
 mongoDB.on('error',console.error.bind(console,'Connection Error'));
 mongoDB.once('open',()=>{
-  console.log("Connected with the MongoDB");
+  console.log("Connected with the MongoDB")
 });
-mongoose.connect(DB.URI,{useNewURIParser:true,useUnifiedTopology:true}) 
+mongoose.connect(DB.URI,{useNewURIParser:true,useUnifiedTopology:true}) */
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -33,33 +33,25 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // mongoose.connect('mongodb+srv://obadaljabberi:obad1234@cluster0.mgss7.mongodb.net/', { useNewUrlParser: true, useUnifiedTopology: true });
 
-const reminderSchema = new mongoose.Schema({
-  title: {type: String,required: true},
-  description: string,
-  date: Date,
-  time: time,
-  category: string
-});
-
-const Reminder = mongoose.model('Reminder', reminderSchema);
+// const ItemSchema = new mongoose.Schema({
 //   name: String,
 //   description: String
 // });
 
 // const Item = mongoose.model('Item', ItemSchema);
 
-app.post('/create', async (req, res) => {
-  const { name, description } = req.body;
+// app.post('/create', async (req, res) => {
+//   const { name, description } = req.body;
 
-  try {
-     const newItem = new Item({ name, description });
-     await newItem.save();
-     res.redirect('/');
-   } catch (error) {
-     console.error(error);
-     res.status(500).send("An error occured while saving the data.");
-   }
- });
+//   try {
+//     const newItem = new Item({ name, description });
+//     await newItem.save();
+//     res.redirect('/');
+//   } catch (error) {
+//     console.error(error);
+//     res.status(500).send("An error occured while saving the data.");
+//   }
+// });
 
 app.post('/create', (req, res) => {
   const { name, description } = req.body;
