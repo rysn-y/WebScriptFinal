@@ -3,33 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/stylesheets/style.css">
     <title>Edit Reminders</title>
 </head>
 <body>
-    <form   method="POST">
-        <h2>Edit Reminder</h2>
-        <div>
-          <label>Title:</label>
-          <input type="text" name="title"  required />
-          <br>
-          <label>Description:</label>
-          <textarea name="description" required></textarea>
-          <br>
-          <label>Date:</label>
-          <input type="date" name="date" required />
-          <br>
-          <label>Time:</label>
-          <input type="time" name="time"  required />
-          <br>
-          <label>Category:</label>
-          <input type="text" name="category"  />
-        </div>
-        <button type="submit">Save Changes</button>
-        
-    </form>
-    <a href="/reminders" class="h4 text-dark  ">
-        <button class="btn-cancel">Cancel</button>
-    </a>
-      
+    <div class="form-container">
+        <form method="POST">
+            <h2>Edit Reminder</h2>
+            <div>
+                <label>Title:</label>
+                <input type="text" name="title" required />
+                
+                <label>Description:</label>
+                <textarea name="description" rows="4" required></textarea>
+                
+                <label>Date:</label>
+                <input type="date" name="date" required />
+                
+                <label>Time:</label>
+                <input type="time" name="time" required />
+                
+                <label>Category:</label>
+                <input type="text" name="category" />
+            </div>
+            <div class="button-group">
+                <button type="submit" class="btn-save">Save Changes</button>
+                <a href="/reminders" class="h4 text-dark">
+                    <button type="button" class="btn-cancel">Cancel</button>
+                </a>
+            </div>
+        </form>
+    </div>
 </body>
 </html>
