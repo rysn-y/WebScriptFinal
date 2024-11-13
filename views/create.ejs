@@ -13,27 +13,32 @@
   </head>
 
   <body>
-    <div class="container mt-5">
-      <h1 class="mb-4">Create</h1>
-
-      <!-- Bootstrap Form -->
-      <form action="/create" method="POST">
-        <div class="mb-3">
-          <label for="name" class="form-label">Name</label>
-          <input type="text" id="name" name="name" class="form-control" required>
-        </div>
-
-        <div class="mb-3">
-          <label for="description" class="form-label">Description</label>
-          <textarea id="description" name="description" class="form-control" rows="4" required></textarea>
-        </div>
-
-        <button type="submit" class="btn btn-primary">Submit</button>
-        <a href="/" class="btn btn-secondary">Back to Home</a>
-      </form>
+    <div class="form-container">
+        <form method="POST">
+            <h2>Create Reminder</h2>
+            <div>
+                <label>Title:</label>
+                <input type="text" name="title" required />
+                
+                <label>Description:</label>
+                <textarea name="description" rows="4" required></textarea>
+                
+                <label>Date:</label>
+                <input type="date" name="date" required />
+                
+                <label>Time:</label>
+                <input type="time" name="time" required />
+                
+                <label>Category:</label>
+                <input type="text" name="category" />
+            </div>
+            <div class="button-group">
+                <button type="submit" class="btn-save">Save Changes</button>
+                <a href="/reminders" class="h4 text-dark">
+                    <button type="button" class="btn-cancel">Cancel</button>
+                </a>
+            </div>
+        </form>
     </div>
-
-    <!-- Bootstrap JS and Popper.js CDN -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-  </body>
+</body>
 </html>
