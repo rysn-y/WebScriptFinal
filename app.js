@@ -24,8 +24,9 @@ app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 
+require('dotenv').config();
 // MongoDB Connection
-mongoose.connect('mongodb+srv://barnabasagbekorode:barney02@cluster0.numvz.mongodb.net/', {
+mongoose.connect(process.env.MONGODB_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 }).then(() => {
