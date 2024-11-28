@@ -113,7 +113,7 @@ app.get('/dash', (req, res) => {
 
 // Handle Login
 app.post('/login', passport.authenticate('local', {
-  successRedirect: '/index',
+  successRedirect: '/',
   failureRedirect: '/login',
   failureFlash: false,
 }));
@@ -125,7 +125,9 @@ app.post('/register', async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, 10);
     const newUser = new User({ username, password: hashedPassword });
     await newUser.save();
-    res.status(201).send('User registered');
+    
+
+    res.redirect('/');
   } catch (err) {
     res.status(400).send('Error registering user: ' + err.message);
   }

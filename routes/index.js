@@ -21,4 +21,14 @@ router.get('/edit', function(req, res, next) {
   res.render('edit', { title: 'edit' });
 });
 
+/* GET login page. */
+router.get('/login', function(req, res, next) {
+  res.render('login', { title: 'login' });
+});
+
+/* GET register page. */
+router.get('/register', function(req, res, next) {
+  res.render('register', { title: 'register' });
+});
+
 module.exports = router;
