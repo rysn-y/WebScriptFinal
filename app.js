@@ -26,7 +26,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 require('dotenv').config();
 // MongoDB Connection
-mongoose.connect(process.env.MONGODB_URI, {
+mongoose.connect(process.env.MONGO_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 }).then(() => {
@@ -94,12 +94,12 @@ passport.deserializeUser(async (id, done) => {
 // Routes
 // Render Login Page
 app.get('/login', (req, res) => {
-  res.render('login');
+  res.render('login', { title: 'Login Page' });
 });
 
 // Render Register Page
 app.get('/register', (req, res) => {
-  res.render('register');
+  res.render('register', { title: 'Register - RecallNow' });
 });
 
 // Render Dashboard (Protected)
