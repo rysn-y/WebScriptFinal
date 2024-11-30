@@ -113,7 +113,7 @@ app.get('/dash', (req, res) => {
 
 // Handle Login
 app.post('/login', passport.authenticate('local', {
-  successRedirect: '/login?login=true',
+  successRedirect: '/reminders?login=true',
   failureRedirect: '/login?login=false',
   failureFlash: false,
 }));
