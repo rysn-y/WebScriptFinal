@@ -113,8 +113,8 @@ app.get('/dash', (req, res) => {
 
 // Handle Login
 app.post('/login', passport.authenticate('local', {
-  successRedirect: '/',
-  failureRedirect: '/login',
+  successRedirect: '/login?login=true',
+  failureRedirect: '/login?login=false',
   failureFlash: false,
 }));
 
@@ -127,9 +127,9 @@ app.post('/register', async (req, res) => {
     await newUser.save();
     
 
-    res.redirect('/');
+    res.redirect('/register?register=true');
   } catch (err) {
-    res.status(400).send('Error registering user: ' + err.message);
+    res.redirect('/register?register=false');
   }
 });
 
@@ -156,7 +156,7 @@ app.post('/create', async (req, res) => {
   try {
     const newItem = new Item({ name, description });
     await newItem.save();
-    res.redirect('/');
+    res.redirect('/create?create=true');
   } catch (error) {
     console.error(error);
     res.status(500).send("An error occurred while saving the data.");

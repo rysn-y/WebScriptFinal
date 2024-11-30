@@ -72,12 +72,29 @@
             padding: 15px;
         }
     </style>
+
+    <script>
+        window.onload = function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const x = urlParams.get('register'); // Check if the regisstration was succesful
+            
+            if (x == 'false') {
+                // pop up message informing about success
+                alert('Could not register account, account may already exist!');
+            }
+            if(x == 'true')
+            {
+            alert('Register success!');
+            }
+        };
+    </script>
+
 </head>
 <body>
     <nav class="navbar navbar-expand-lg">
         <div class="container-fluid">
             <a class="navbar-brand" href="/">
-                <img src="/images/testlogo.png" alt="RecallNow Logo" width="30" height="30">
+                <img src="/images/aaaaa.png" alt="RecallNow Logo" width="30" height="30">
                 RecallNow
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
