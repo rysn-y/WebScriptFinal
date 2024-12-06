@@ -9,6 +9,8 @@ const logger = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const createError = require('http-errors');
+const Item = require('./models/item');
+const methodOverride = require('method-override');
 
 const app = express();
 
@@ -23,6 +25,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(methodOverride('_method'));
 
 require('dotenv').config();
 // MongoDB Connection
@@ -42,14 +45,6 @@ const userSchema = new mongoose.Schema({
 });
 
 const User = mongoose.model('User', userSchema);
-
-// Define Item Schema and Model
-const itemSchema = new mongoose.Schema({
-  name: String,
-  description: String,
-});
-
-const Item = mongoose.model('Item', itemSchema);
 
 // Passport Configuration
 app.use(session({
@@ -102,6 +97,17 @@ app.get('/register', (req, res) => {
   res.render('register', { title: 'Register - RecallNow' });
 });
 
+// Display all reminders
+app.get('/reminders', async (req, res) => {
+  try {
+      const reminders = await Item.find();
+      res.render('reminders', { title: 'Reminders', reminders });
+  } catch (error) {
+      console.error(error);
+      res.status(500).send("Error fetching reminders.");
+  }
+});
+
 // Render Dashboard (Protected)
 app.get('/dash', (req, res) => {
   if (req.isAuthenticated()) {
@@ -152,15 +158,43 @@ app.get('/index', (req, res) => {
 
 // Item Creation Route
 app.post('/create', async (req, res) => {
-  const { name, description } = req.body;
+  const { name, description, date, time } = req.body; // Include date and time fields
+
   try {
-    const newItem = new Item({ name, description });
-    await newItem.save();
-    res.redirect('/create?create=true');
+      const newItem = new Item({ name, description, date, time }); // Include date and time when creating the reminder
+      await newItem.save();
+      res.redirect('/reminders'); // Redirect to the reminders page
   } catch (error) {
-    console.error(error);
-    res.status(500).send("An error occurred while saving the data.");
+      console.error('Error creating reminder:', error);
+      res.status(500).send('An error occurred while saving the data.');
   }
+});
+
+// Update an existing reminder
+app.put('/reminders/:id', async (req, res) => {
+  const { id } = req.params;
+  const { name, description, date, time } = req.body; // Include date and time
+
+  try {
+      await Item.findByIdAndUpdate(id, { name, description, date, time }); // Update the reminder with date and time
+      res.redirect('/reminders'); // Redirect to the reminders page
+  } catch (error) {
+      console.error('Error updating reminder:', error);
+      res.status(500).send('Error updating reminder.');
+  }
+});
+
+
+// Delete a reminder
+app.delete('/reminders/:id', async (req, res) => {
+    const { id } = req.params;
+    try {
+        await Item.findByIdAndDelete(id);
+        res.redirect('/reminders');
+    } catch (error) {
+        console.error(error);
+        res.status(500).send("Error deleting reminder.");
+    }
 });
 
 // Import and Use Routes
